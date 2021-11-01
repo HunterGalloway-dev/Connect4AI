@@ -1,0 +1,16 @@
+C:\Users\14403\source\repos\ConnectFourAI\ConnectFourAI\obj\Debug\net5.0\ConnectFourAI.csproj.AssemblyReference.cache
+C:\Users\14403\source\repos\ConnectFourAI\ConnectFourAI\obj\Debug\net5.0\ConnectFourAI.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\14403\source\repos\ConnectFourAI\ConnectFourAI\obj\Debug\net5.0\ConnectFourAI.AssemblyInfoInputs.cache
+C:\Users\14403\source\repos\ConnectFourAI\ConnectFourAI\obj\Debug\net5.0\ConnectFourAI.AssemblyInfo.cs
+C:\Users\14403\source\repos\ConnectFourAI\ConnectFourAI\obj\Debug\net5.0\ConnectFourAI.csproj.CoreCompileInputs.cache
+C:\Users\14403\source\repos\ConnectFourAI\ConnectFourAI\bin\Debug\net5.0\ConnectFourAI.exe
+C:\Users\14403\source\repos\ConnectFourAI\ConnectFourAI\bin\Debug\net5.0\ConnectFourAI.deps.json
+C:\Users\14403\source\repos\ConnectFourAI\ConnectFourAI\bin\Debug\net5.0\ConnectFourAI.runtimeconfig.json
+C:\Users\14403\source\repos\ConnectFourAI\ConnectFourAI\bin\Debug\net5.0\ConnectFourAI.runtimeconfig.dev.json
+C:\Users\14403\source\repos\ConnectFourAI\ConnectFourAI\bin\Debug\net5.0\ConnectFourAI.dll
+C:\Users\14403\source\repos\ConnectFourAI\ConnectFourAI\bin\Debug\net5.0\ref\ConnectFourAI.dll
+C:\Users\14403\source\repos\ConnectFourAI\ConnectFourAI\bin\Debug\net5.0\ConnectFourAI.pdb
+C:\Users\14403\source\repos\ConnectFourAI\ConnectFourAI\obj\Debug\net5.0\ConnectFourAI.dll
+C:\Users\14403\source\repos\ConnectFourAI\ConnectFourAI\obj\Debug\net5.0\ref\ConnectFourAI.dll
+C:\Users\14403\source\repos\ConnectFourAI\ConnectFourAI\obj\Debug\net5.0\ConnectFourAI.pdb
+C:\Users\14403\source\repos\ConnectFourAI\ConnectFourAI\obj\Debug\net5.0\ConnectFourAI.genruntimeconfig.cache
