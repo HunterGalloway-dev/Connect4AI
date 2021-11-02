@@ -9,8 +9,8 @@ namespace ConnectFourAI
         static void Main(string[] args)
         {
 
-            //BenchMarkAI();
-            PlayGame();
+            BenchMarkAI();
+            //PlayGame();
         }
 
         public static void BenchMarkAI()
@@ -20,10 +20,10 @@ namespace ConnectFourAI
                         {
                             { 0,0,0,0,0,0,0 },
                             { 0,0,0,0,0,0,0 },
-                            { 0,0,0,0,2,0,0 },
-                            { 0,0,1,2,1,0,0 },
-                            { 0,0,2,1,1,0,0 },
-                            { 2,2,1,1,1,2,0 }
+                            { 0,0,0,0,0,0,0 },
+                            { 0,0,0,0,0,0,0 },
+                            { 0,0,0,2,0,0,0 },
+                            { 0,1,1,1,2,0,0 }
                         };
             
 
@@ -31,11 +31,12 @@ namespace ConnectFourAI
             Stopwatch watch = new Stopwatch();
             long time = 0;
             double iterations = 1.0;
+            Connect4AI.Depth = 7;
             for (int i = 0; i < iterations; i++)
             {
                 watch.Reset();
                 watch.Start();
-                Console.WriteLine(Connect4AI.BestMove(board, (int)Connect4AI.BoardState.PlayerOne, (int)Connect4AI.BoardState.PlayerTwo));
+                Console.WriteLine(Connect4AI.BestMove(board, (int)Connect4AI.BoardState.PlayerTwo, (int)Connect4AI.BoardState.PlayerTwo));
                 watch.Stop();
                 time += (watch.ElapsedMilliseconds);
             }

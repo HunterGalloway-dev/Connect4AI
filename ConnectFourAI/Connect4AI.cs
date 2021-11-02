@@ -11,7 +11,7 @@ namespace ConnectFourAI
         public static int NumRows = 6;
         public static int NumCols = 7;
 
-        public static int Depth { get; private set; } = 9;
+        public static int Depth { get; set; } = 3;
 
         public enum BoardState
         {
@@ -28,19 +28,174 @@ namespace ConnectFourAI
                 return -1;
             }
 
-            int bestMove = possMoves[0];
-            int maxScore = MinMax(board, bestMove, curPlayer, myPlayer, Depth),tmpScore;
+            int bestMove = -1;
+            int maxScore = Int32.MinValue;
+            int tmpScore;
 
-            Parallel.ForEach(possMoves, move =>
+            foreach(int move in possMoves)
             {
-                if ((tmpScore = MinMax(board, move, curPlayer, myPlayer, Depth)) > maxScore)
+                if ((tmpScore = MinMaxV3(MakeMove(board, move, curPlayer), SwitchPlayer(curPlayer), myPlayer, Int32.MinValue, Int32.MaxValue, Depth)) > maxScore)
                 {
                     bestMove = move;
                     maxScore = tmpScore;
                 }
-            });
-
+                Console.WriteLine(tmpScore);
+            }
+            Console.WriteLine(maxScore);
             return bestMove;
+        }
+
+        public static int MinMaxV3(int[,] board, int curPlayer, int myPlayer, int alpha, int beta, int depth)
+        {
+            int whoWon = -1;
+            if((whoWon = WhoWon(board)) != -1 || depth == 0)
+            {
+                return ScoreBoard(board, myPlayer, curPlayer, whoWon);
+            }
+            int val, score;
+            List<int> possMoves = PossMoves(board);
+            if(curPlayer == myPlayer) // Maximize
+            {
+                val = Int32.MinValue;
+                foreach(int possMove in possMoves)
+                {
+                    score = MinMaxV3(MakeMove(board, possMove, curPlayer),SwitchPlayer(curPlayer), myPlayer, alpha, beta, depth - 1);
+                    val = Math.Max(val, score);
+                    alpha = Math.Max(alpha, val);
+                    if(alpha >= beta)
+                    {
+                        break;
+                    }
+                }
+            } else // Minimize
+            {
+                val = Int32.MaxValue;
+                foreach (int possMove in possMoves)
+                {
+                    score = MinMaxV3(MakeMove(board, possMove, curPlayer), SwitchPlayer(curPlayer), myPlayer, alpha, beta, depth - 1);
+                    val = Math.Min(val, score);
+                    alpha = Math.Min(alpha, val);
+                    if (alpha >= beta)
+                    {
+                        break;
+                    }
+                }
+            }
+
+            return val - (Depth - depth);
+        }
+
+        public static int ScoreBoard(int[,] board, int myPlayer, int curPlayer, int whoWon)
+        {
+            int score = 0;
+            if(whoWon == myPlayer)
+            {
+                return 100000;
+            } else if(whoWon == SwitchPlayer(myPlayer))
+            {
+                return -100000;
+            } else if(whoWon == 0) // Draw
+            {
+                return 0;
+            }
+            int r, c, i, cnt;
+            for (r = 0; r < NumRows; r++)
+            {
+                for (c = 0; c < NumCols; c++)
+                {
+                    if (board[r, c] == (int)BoardState.Empty)
+                    {
+                        full = false;
+                    }
+                    cnt = 0;
+                    if (c < NumCols - 3 && board[r, c] != (int)BoardState.Empty)
+                    {
+                        for (i = 1; i < 4; i++)
+                        {
+                            if (board[r, c] == board[r, c + i])
+                            {
+                                cnt++;
+                            }
+                        }
+
+                        if (cnt == 3)
+                        {
+                            return board[r, c];
+                        }
+                        else
+                        {
+                            cnt = 0;
+                        }
+                    }
+
+                    cnt = 0;
+                    if (r < NumRows - 3 && board[r, c] != (int)BoardState.Empty)
+                    {
+                        for (i = 1; i < 4; i++)
+                        {
+                            if (board[r, c] == board[r + i, c])
+                            {
+                                cnt++;
+                            }
+                        }
+
+                        if (cnt == 3)
+                        {
+                            return board[r, c];
+                        }
+                        else
+                        {
+                            cnt = 0;
+                        }
+                    }
+
+                    cnt = 0;
+                    if ((r < NumRows - 3 && c < NumCols - 3) && board[r, c] != (int)BoardState.Empty)
+                    {
+                        for (i = 1; i < 4; i++)
+                        {
+                            if (board[r, c] == board[r + i, c + i])
+                            {
+                                cnt++;
+                            }
+                        }
+
+                        if (cnt == 3)
+                        {
+                            return board[r, c];
+                        }
+                        else
+                        {
+                            cnt = 0;
+                        }
+                    }
+
+                    cnt = 0;
+                    if (c >= 3 && r < NumRows - 3 && board[r, c] != (int)BoardState.Empty)
+                    {
+                        for (i = 1; i < 4; i++)
+                        {
+                            if (board[r, c] == board[r + i, c - i])
+                            {
+                                cnt++;
+                            }
+                        }
+
+                        if (cnt == 3)
+                        {
+                            return board[r, c];
+                        }
+                        else
+                        {
+                            cnt = 0;
+                        }
+                    }
+                }
+            }
+
+            // Give alot of points for defense less than winning
+
+            return score;
         }
 
         public static int MinMaxV2(int[,] board, int move, int curPlayer, int mainPlayer)
